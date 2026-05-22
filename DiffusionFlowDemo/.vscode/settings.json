@@ -1,0 +1,11 @@
+// {
+//     "cmake.generator": "Visual Studio 17 2022", //指定 CMake 生成哪种类型的构建系统，MinGW Makefiles
+//     "cmake.configureArgs": [
+//         "-A x64",//指定目标平台架构为 64 位，没有这个会默认使用 Win32 (32位)
+//         //"-T host=x64"//指定编译工具链架构为 64 位
+//     ],
+//     "cmake.buildDirectory": "${workspaceFolder}/build",//指定 CMake 生成的构建文件的存放目录
+//     "cmake.configureSettings": {
+//         "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64"//CMake 查找依赖包的搜索路径，在这个目录下的 lib/cmake/Qt5 找到 Qt5Config.cmake
+//     }
+// }
