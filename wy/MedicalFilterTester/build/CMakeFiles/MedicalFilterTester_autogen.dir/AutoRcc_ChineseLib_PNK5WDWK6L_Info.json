@@ -1,0 +1,25 @@
+{
+	"BUILD_DIR" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/build/MedicalFilterTester_autogen",
+	"CMAKE_BINARY_DIR" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "E:/WorkSpace/Coding/wy/MedicalFilterTester",
+	"CMAKE_SOURCE_DIR" : "E:/WorkSpace/Coding/wy/MedicalFilterTester",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "MinGW Makefiles",
+	"INCLUDE_DIR" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/build/MedicalFilterTester_autogen/include",
+	"INPUTS" : 
+	[
+		"E:/WorkSpace/Coding/wy/MedicalFilterTester/res/ChineseLib/pinyin.txt"
+	],
+	"LOCK_FILE" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/build/CMakeFiles/MedicalFilterTester_autogen.dir/AutoRcc_ChineseLib_PNK5WDWK6L_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "ChineseLib" ],
+	"OUTPUT_CHECKSUM" : "PNK5WDWK6L",
+	"OUTPUT_NAME" : "qrc_ChineseLib.cpp",
+	"RCC_EXECUTABLE" : "D:/Qt/6.8.1/msvc2022_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/build/CMakeFiles/MedicalFilterTester_autogen.dir/AutoRcc_ChineseLib_PNK5WDWK6L_Used.txt",
+	"SOURCE" : "E:/WorkSpace/Coding/wy/MedicalFilterTester/res/ChineseLib.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

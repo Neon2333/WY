@@ -1,0 +1,3 @@
+D:\Cmake\bin\cmake.exe -E rm -f CMakeFiles\MedicalFilterTester.dir/objects.a
+D:\Qt\Tools\mingw1310_64\bin\ar.exe qc CMakeFiles\MedicalFilterTester.dir/objects.a @CMakeFiles\MedicalFilterTester.dir\objects1.rsp
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -mwindows -Wl,--whole-archive CMakeFiles\MedicalFilterTester.dir/objects.a -Wl,--no-whole-archive -o MedicalFilterTester.exe -Wl,--out-implib,libMedicalFilterTester.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\MedicalFilterTester.dir\linkLibs.rsp
