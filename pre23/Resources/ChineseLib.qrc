@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>ChineseLib/pinyin.txt</file>
-    </qresource>
-</RCC>
