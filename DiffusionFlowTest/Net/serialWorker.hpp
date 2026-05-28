@@ -17,7 +17,7 @@ class SerialWorker : public QObject
 public:
     class Builder;
 
-    SerialWorker(const QString portName, qint32 baudRate, QSerialPort::DataBits dataBits, QSerialPort::Parity parity, QSerialPort::StopBits stopBits, QSerialPort::FlowControl flowControl);
+    SerialWorker(const QString portName, qint32 baudRate, QSerialPort::DataBits dataBits, QSerialPort::Parity parity, QSerialPort::StopBits stopBits, QSerialPort::FlowControl flowControl, int ringBufferSize);
     ~SerialWorker();    
 
     bool Connect();     //连接串口
@@ -46,7 +46,8 @@ private:
 	QSerialPort::FlowControl flowControl_;	//流控制
 
     bool isConnected_ = false;	//串口连接状态
-    RingBuffer ringBuffer_{DEFAULT_RING_BUFFER_SIZE};  //环形缓冲区，容量默认大小
+    int ringBufferSize_ = 4096;
+    RingBuffer ringBuffer_{ringBufferSize_};  //环形缓冲区，容量默认大小
 };
 
 #endif

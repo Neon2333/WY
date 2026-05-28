@@ -9,6 +9,7 @@ public:
     Builder& SetParity(QSerialPort::Parity parity) { parity_ = parity;  return *this; }
     Builder& SetStopBits(QSerialPort::StopBits stopBits) { stopBits_ = stopBits;  return *this; }
     Builder& SetFlowControl(QSerialPort::FlowControl flowControl) { flowControl_ = flowControl;  return *this; }
+    Builder& SetRingBufferSize(int size) { ringBufferSize_ = size; return *this; }
 
     SerialWorker& Build() 
     {
@@ -21,12 +22,13 @@ private:
     QSerialPort::Parity parity_;
     QSerialPort::StopBits stopBits_;
     QSerialPort::FlowControl flowControl_;
+    int ringBufferSize_; 
 };
 
 
 
 SerialWorker::SerialWorker(const QString portName, qint32 baudRate, QSerialPort::DataBits dataBits, QSerialPort::Parity parity, QSerialPort::StopBits stopBits, QSerialPort::FlowControl flowControl)
-    : portName_(portName), baudRate_(baudRate), dataBits_(dataBits), parity_(parity), stopBits_(stopBits), flowControl_(flowControl)
+    : portName_(portName), baudRate_(baudRate), dataBits_(dataBits), parity_(parity), stopBits_(stopBits), flowControl_(flowControl), ringBuffer_(ringBufferSize_)
 {
     this->moveToThread(&thread_);  
     //连接串口数据可读信号到槽函数
