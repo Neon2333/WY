@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(DiffusionFlowDemo)
+project(DiffusionFlow)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -9,8 +9,9 @@ set(CMAKE_AUTOMOC ON)   # 处理 Q_OBJECT 宏 - 解决当前错误
 set(CMAKE_AUTOUIC ON)   # 处理 .ui 文件
 set(CMAKE_AUTORCC ON)   # 处理 .qrc 资源文件
 
-# 查找 Qt5 组件
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+# 查找 Qt6 组件
+#find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets SerialPort)
 
 # 如果有其他 Qt 模块，在这里添加，例如：
 # find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
@@ -22,11 +23,12 @@ add_executable(${PROJECT_NAME}
     mainwindow.h
 )
 
-# 链接 Qt5 库
+# 链接 Qt6 库
 target_link_libraries(${PROJECT_NAME}
-    Qt5::Widgets
+    Qt6::Widgets
+    Qt6::Core
+    Qt6::SerialPort
     # 如果使用其他模块，也在这里添加，例如：
-    # Qt5::Core
     # Qt5::Gui
 )
 
