@@ -21,6 +21,12 @@ add_executable(${PROJECT_NAME}
     main.cpp
     mainwindow.cpp
     mainwindow.h
+    Common/Utils.hpp
+    DataStructure/rawFrame.hpp
+    Net/serialWorker.cpp
+    Net/serialWorker.hpp 
+    Net/ringBuffer.hpp
+    Net/threadQueue.hpp
 )
 
 # 链接 Qt6 库

@@ -5,8 +5,9 @@
 #include <QSerialPort>
 #include <QThread>
 #include <QString>
-#include "rawFrame.hpp"
 #include "ringBuffer.hpp"
+#include "../DataStructure/rawFrame.hpp"
+#include "../Common/utils.hpp"
 
 const int DEFAULT_RING_BUFFER_SIZE = 4096; //默认环形缓冲区大小
 
@@ -17,7 +18,13 @@ class SerialWorker : public QObject
 public:
     class Builder;
 
-    SerialWorker(const QString portName, qint32 baudRate, QSerialPort::DataBits dataBits, QSerialPort::Parity parity, QSerialPort::StopBits stopBits, QSerialPort::FlowControl flowControl, int ringBufferSize);
+    SerialWorker(const QString portName, 
+                qint32 baudRate, 
+                QSerialPort::DataBits dataBits, 
+                QSerialPort::Parity parity, 
+                QSerialPort::StopBits stopBits, 
+                QSerialPort::FlowControl flowControl, 
+                int ringBufferSize);
     ~SerialWorker();    
 
     bool Connect();     //连接串口

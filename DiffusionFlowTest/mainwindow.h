@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "QPushButton.h"
+#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

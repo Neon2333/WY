@@ -1,13 +1,13 @@
 #include "mainwindow.h"
-#include "QPushButton.h"
-#include "QDebug.h"
+#include <QPushButton>
+#include "Common/utils.hpp"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     this->resize(800,600);
     btn_difusionFlow = new QPushButton(this);
-    qDebug()<<"123\n";
+    qout << "123\n";
 }
 
 MainWindow::~MainWindow()

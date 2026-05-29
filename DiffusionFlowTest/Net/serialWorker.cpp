@@ -11,9 +11,9 @@ public:
     Builder& SetFlowControl(QSerialPort::FlowControl flowControl) { flowControl_ = flowControl;  return *this; }
     Builder& SetRingBufferSize(int size) { ringBufferSize_ = size; return *this; }
 
-    SerialWorker& Build() 
+    SerialWorker Build() 
     {
-        return SerialWorker(portName_, baudRate_, dataBits_, parity_, stopBits_, flowControl_);
+        return SerialWorker(portName_, baudRate_, dataBits_, parity_, stopBits_, flowControl_, ringBufferSize_);
     }
 private:
     QString portName_;
@@ -27,8 +27,15 @@ private:
 
 
 
-SerialWorker::SerialWorker(const QString portName, qint32 baudRate, QSerialPort::DataBits dataBits, QSerialPort::Parity parity, QSerialPort::StopBits stopBits, QSerialPort::FlowControl flowControl)
-    : portName_(portName), baudRate_(baudRate), dataBits_(dataBits), parity_(parity), stopBits_(stopBits), flowControl_(flowControl), ringBuffer_(ringBufferSize_)
+SerialWorker::SerialWorker(const QString portName, 
+                           qint32 baudRate, 
+                           QSerialPort::DataBits dataBits, 
+                           QSerialPort::Parity parity, 
+                           QSerialPort::StopBits stopBits, 
+                           QSerialPort::FlowControl flowControl,
+                           int ringBufferSize)
+    : portName_(portName), baudRate_(baudRate), dataBits_(dataBits), 
+    parity_(parity), stopBits_(stopBits), flowControl_(flowControl), ringBuffer_(ringBufferSize)
 {
     this->moveToThread(&thread_);  
     //连接串口数据可读信号到槽函数
@@ -44,7 +51,7 @@ SerialWorker::SerialWorker(const QString portName, qint32 baudRate, QSerialPort:
     //确保线程结束时删除worker对象
     connect(&thread_, &QThread::finished, this, &QObject::deleteLater); 
     //确保线程结束时删除线程对象
-    connect(&thread_, &QThread::finished, &thread, &QObject::deleteLater);
+    connect(&thread_, &QThread::finished, &thread_, &QObject::deleteLater);
 
     // 启动线程
     thread_.start();  
@@ -60,9 +67,9 @@ bool SerialWorker::Connect()
 {
    if(isConnected_) 
        return true;
-    if(serialPort_.open(QIODevice::ReadWrite))
+    if(!serialPort_.open(QIODevice::ReadWrite))
     {
-        qWarning() << "failed to open serial port:" << serialPort_.errorString();
+        qwarning << "failed to open serial port:" << serialPort_.errorString();
         return false;
     }
     isConnected_ = true;
@@ -74,14 +81,14 @@ bool SerialWorker::Disconnect()
     if(!isConnected_)
         return true; 
     if (serialPort_.isOpen()) 
-        m_serialPort->close(); 
+        serialPort_.close(); 
     isConnected_ = false;
     return true; 
 }
 
 bool SerialWorker::Send(const QByteArray& data)
 {
-    if (serialPort.write(dataWrite) == -1) //失败返回-1
+    if (serialPort_.write(data) == -1) //失败返回-1
     {
         emit signal_error(serialPort_.errorString());
         return false;
@@ -107,16 +114,18 @@ bool SerialWorker::Read(QByteArray& data)
 }
 
 //循环提取RawFrame
-void ExtractFrame(const QByteArray& data)
+RawFrame SerialWorker::ExtractFrame(const QByteArray& data)
 {
     RawFrame rawFrame;
-    while (true) 
+    while (true)
     {
-        rawFrame = ringBuffer.extractFrame();
-        if (rawFrame.isEmpty()) 
+        QByteArray frameData = ringBuffer_.ExtractRawFrame();
+        if (frameData.isEmpty())
             break;
-        emit frameReady(rawFrame); 
+        rawFrame.Make(frameData);
+        emit signal_frameReady(rawFrame);
     }
+    return rawFrame;
 }
 
 void SerialWorker::onReadyRead()
