@@ -9,6 +9,9 @@ set(CMAKE_AUTOMOC ON)   # 处理 Q_OBJECT 宏 - 解决当前错误
 set(CMAKE_AUTOUIC ON)   # 处理 .ui 文件
 set(CMAKE_AUTORCC ON)   # 处理 .qrc 资源文件
 
+set(SQLITE_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/DB/sqlite3)
+
+
 # 查找 Qt6 组件
 #find_package(Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets SerialPort)
@@ -17,16 +20,23 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets SerialPort)
 # find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
 # 添加可执行文件
-add_executable(${PROJECT_NAME}
-    main.cpp
+add_executable(${PROJECT_NAME} main.cpp)
+
+target_sources(${PROJECT_NAME} PRIVATE 
+    ${SQLITE_SRC_DIR}/sqlite3.c
     mainwindow.cpp
+    Net/serialWorker.cpp
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${SQLITE_SRC_DIR}
     mainwindow.h
     Common/Utils.hpp
     DataStructure/rawFrame.hpp
-    Net/serialWorker.cpp
     Net/serialWorker.hpp 
     Net/ringBuffer.hpp
     Net/threadQueue.hpp
+
 )
 
 # 链接 Qt6 库

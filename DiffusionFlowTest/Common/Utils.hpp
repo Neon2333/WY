@@ -2,7 +2,7 @@
 #define UTILS_HPP
 #include <QDebug>
 
-#define qout qDebug()<<"["<<__FILE__<<":"<<__LINE__<<"]"
-#define qwarning qWarning()<<"["<<__FILE__<<":"<<__LINE__<<"]"
+#define qout qDebug()<<"[Info]("<<__FILE__<<":"<<__LINE__<<")"
+#define qwarning qWarning()<<"[Warning]("<<__FILE__<<":"<<__LINE__<<")"
 
 #endif

@@ -8,7 +8,6 @@
 //下位机原始帧格式
 struct RawFrame
 {
-public:
     void Make(const QByteArray& header, const QByteArray& data, const uint8_t checksum)
     {
         header_ = header;
