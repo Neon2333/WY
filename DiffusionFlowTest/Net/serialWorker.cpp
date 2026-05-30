@@ -69,7 +69,7 @@ bool SerialWorker::Connect()
        return true;
     if(!serialPort_.open(QIODevice::ReadWrite))
     {
-        qwarning << "failed to open serial port:" << serialPort_.errorString();
+        qerr << "failed to open serial port:" << serialPort_.errorString();
         return false;
     }
     isConnected_ = true;
