@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)   # 处理 Q_OBJECT 宏 - 解决当前错误
 set(CMAKE_AUTOUIC ON)   # 处理 .ui 文件
 set(CMAKE_AUTORCC ON)   # 处理 .qrc 资源文件
 
-set(SQLITE_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/DB/sqlite3)
+set(SQLITE_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdParty/sqlite3)
 
 
 # 查找 Qt6 组件
